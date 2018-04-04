@@ -5,11 +5,11 @@ This is a `C#` example code that shows you how to convert a ms-sql command or st
 
 ## How?
 ### Table Content
-1. [Prepare sql statement](#Prepare-sql-statement)
-2. Prepare data object
-3. DataTable Select
-4. Function: ExcuteObject
-5. [Result](#Result)
+1. [Prepare sql statement](#prepare-sql-statement)
+2. [Prepare data object](#prepare-data-object)
+3. [DataTable Select](#dataTable-select)
+4. [Function: ExcuteObject](#function-excuteObject)
+5. [Result](#result)
 
 ### Prepare sql statement  
 Let's create a sample of select statement and stored procedure:
