@@ -57,7 +57,7 @@ AS
 END
 ```
 ### Prepare data object
-Then, we are going to create a object `Person` in `c#`:
+Then, we are going to create a object <b>`Person.cs`</b> in `c#`:
 ```c#
 public int ID { get; set; }
 public string FirstName { get; set; }
