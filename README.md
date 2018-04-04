@@ -7,7 +7,7 @@ This is a `C#` example code that shows you how to convert a ms-sql command or st
 ### Table Content
 1. [Prepare sql statement](#prepare-sql-statement)
 2. [Prepare data object](#prepare-data-object)
-3. [DataTable Select](#dataTable-select)
+3. [DataTable Select](#datatable-select)
 4. [Function: ExcuteObject](#function-excuteObject)
 5. [Result](#result)
 
