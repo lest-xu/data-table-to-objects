@@ -65,3 +65,30 @@ public string LastName { get; set; }
 public char Sex { get; set; }
 public DateTime DateofBirth { get; set; }
 ```
+### DataTable Select
+The function to select a stored procedure or sql command text and return it as data table:
+```c#
+	internal DataTable Select(string storedProcedureorCommandText, bool isStoredProcedure = true)
+        {
+            DataTable dataTable = new DataTable();
+            using (SqlConnection connection = new SqlConnection("ConnectionString"))
+            {
+                using (SqlCommand command = new SqlCommand())
+                {
+                    command.Connection = connection;
+                    command.CommandType = CommandType.StoredProcedure;
+                    if (!isStoredProcedure)
+                    {
+                        command.CommandType = CommandType.Text;
+                    }
+                    command.CommandText = storedProcedureorCommandText;
+                    connection.Open();
+
+                    SqlDataAdapter dataAdapter = new SqlDataAdapter(command);
+                    dataAdapter.Fill(dataTable);
+
+                    return dataTable;
+                }
+            }
+        }
+```
