@@ -14,11 +14,11 @@ This is a `C#` example code that shows you how to convert a ms-sql command or st
 ### Prepare sql statement
 Let's create a sample of select statement and stored procedure:
 * #### Select satement
-```
-SELECT Id, FirstName, LastName, Sex, Age FROM ExampleTable
+```sql
+SELECT Id, FirstName, LastName, Sex, DateofBirth FROM ExampleTable
 ```
 * #### Stored procedure
-```
+```sql
 CREATE PROCEDURE [dbo].[usp_GetListofPeople]  
 
 AS
@@ -37,7 +37,7 @@ AS
 		 , FirstName AS FirstName
 		 , LastName AS LastName
 		 , Sex AS Sex
-		 , Age AS Age
+		 , DateofBirth AS DateofBirth
 
 	FROM		[dbo].[ExampleTable]
 
@@ -55,4 +55,13 @@ AS
 	END CATCH
 
 END
+```
+### Prepare data object
+Then, we are going to create a object in `c#`:
+```c#
+public int ID { get; set; }
+public string FirstName { get; set; }
+public string LastName { get; set; }
+public char Sex { get; set; }
+public DateTime DateofBirth { get; set; }
 ```
