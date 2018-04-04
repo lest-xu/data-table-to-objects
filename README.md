@@ -5,13 +5,13 @@ This is a `C#` example code that shows you how to convert a ms-sql command or st
 
 ## How?
 ### Table Content
-1. Prepare sql statement
+1. [Prepare sql statement](#Prepare-sql-statement)
 2. Prepare data object
 3. DataTable Select
 4. Function: ExcuteObject
-5. Result
+5. [Result](#Result)
 
-### Prepare sql statement
+### Prepare sql statement  
 Let's create a sample of select statement and stored procedure:
 * #### Select satement
 ```sql
@@ -68,7 +68,7 @@ public DateTime DateofBirth { get; set; }
 ### DataTable Select
 The function to select a stored procedure or sql command text and return it as data table:
 ```c#
-	internal DataTable Select(string storedProcedureorCommandText, bool isStoredProcedure = true)
+	public DataTable Select(string storedProcedureorCommandText, bool isStoredProcedure = true)
         {
             DataTable dataTable = new DataTable();
             using (SqlConnection connection = new SqlConnection("ConnectionString"))
@@ -91,4 +91,36 @@ The function to select a stored procedure or sql command text and return it as d
                 }
             }
         }
+```
+### Function: ExcuteObject
+The function for converting the data table to a list of objects:
+```c#
+	public IEnumerable<T> ExcuteObject<T> (string storedProcedureorCommandText, bool isStoredProcedure = true)
+        {
+            List<T> items = new List<T>();
+            var dataTable = Select(storedProcedureorCommandText, isStoredProcedure); //this will use the DataTable Select function
+            foreach (var row in dataTable.Rows)
+            {
+                T item = (T)Activator.CreateInstance(typeof(T), row);
+                items.Add(item);
+            }
+            return items;
+        }
+```
+### Result
+* #### Run the sql select statement
+```c#
+List<Person> people = new List<Person>();
+people = ExcuteObject<Person>("SELECT Id, FirstName, LastName, Sex, DateofBirth FROM ExampleTable", false).ToList();
+//do something with the result - people
+
+
+```
+* #### Run the sql stored procedure statement
+```c#
+List<Person> people = new List<Person>();
+people = ExcuteObject<Person>("[dbo].[usp_GetListofPeople]", true).ToList();
+//do something with the result - people
+
+
 ```
